@@ -1,52 +1,98 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>3D Музей</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #111;
-      color: #fff;
+      color: #eee;
+      line-height: 1.6;
     }
-
     header {
       background-color: #222;
       text-align: center;
-      padding: 30px;
+      padding: 30px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
-
     header h1 {
       margin: 0;
-      font-size: 2.5em;
+      font-size: 3em;
+      letter-spacing: 1.5px;
     }
-
+    header p {
+      font-size: 1.2em;
+      color: #bbb;
+      margin-top: 10px;
+    }
+    .history {
+      max-width: 900px;
+      margin: 40px auto 60px;
+      background: #1a1a1a;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #333;
+    }
+    .history h2 {
+      margin-top: 0;
+      font-size: 2em;
+      border-bottom: 2px solid #555;
+      padding-bottom: 10px;
+      color: #f0a500;
+    }
+    .history p {
+      font-size: 1.1em;
+      color: #ddd;
+    }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 40px;
-      padding: 40px;
+      padding: 0 40px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
     .item {
       background-color: #1c1c1c;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      border-radius: 14px;
+      box-shadow: 0 0 25px rgba(240,165,0,0.6);
+      transition: transform 0.3s ease;
     }
-
+    .item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(240,165,0,0.9);
+    }
     model-viewer {
       width: 100%;
-      height: 300px;
+      height: 320px;
       background-color: #000;
-      border-radius: 10px;
+      border-radius: 12px;
+      outline: none;
     }
-
     .desc {
-      margin-top: 15px;
+      margin-top: 18px;
+    }
+    .desc h3 {
+      margin: 0 0 10px;
+      color: #f0a500;
+      font-size: 1.4em;
+    }
+    .desc p {
+      margin: 0;
+      color: #ccc;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .history, .gallery {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -54,32 +100,53 @@
 
   <header>
     <h1>3D Музей</h1>
-    <p>Изучайте экспонаты в интерактивном формате</p>
+    <p>Погрузитесь в эпоху великих империй через интерактивные экспонаты</p>
   </header>
+
+  <section class="history">
+    <h2>Добро пожаловать в Виртуальный Музей</h2>
+    <p>
+      Этот музей создан для всех, кто интересуется историей, культурой и военным делом тюркских народов и Османской империи. Здесь собраны уникальные артефакты — от изысканных доспехов до легендарного оружия, каждое из которых воссоздано в формате 3D. Вы можете вращать модели, приближать детали и буквально прикоснуться к прошлому.
+    </p>
+  </section>
 
   <section class="gallery">
 
     <!-- Оттоманский шлем -->
-<div class="item">
-  <model-viewer src="ottoman_helmet (1).glb" alt="Оттоманский шлем" auto-rotate camera-controls></model-viewer>
-  <div class="desc">
-    <h3>Оттоманский шлем</h3>
-    <p>Военный шлем эпохи Османской империи, использовавшийся в XVI–XVII веках. Изготовлен из стали с декоративной чеканкой.</p>
-  </div>
-</div>
-
+    <div class="item">
+      <model-viewer src="ottoman_helmet (1).glb" alt="Оттоманский шлем" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Оттоманский боевой шлем</h3>
+        <p>Массивный шлем с полукруглым верхом, используемый элитной кавалерией Османской империи. Украшен восточными узорами и защищал в сражениях XVI века.</p>
+      </div>
+    </div>
 
     <!-- Тюрский Клинок -->
-<div class="item">
-  <model-viewer src="turk_kilij.glb" alt="Тюрски Клинок" auto-rotate camera-controls></model-viewer>
-  <div class="desc">
-    <h3>Тюрски Клинок</h3>
-    <p>Традиционный Тюрский изогнутый меч, использовавшийся с эпохи Сельджуков до Османской империи. Отличается широкой режущей частью и легкостью.</p>
-  </div>
-</div>
+    <div class="item">
+      <model-viewer src="turk_kilij.glb" alt="Тюрски Клинок" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Тюркский клинок</h3>
+        <p>Изогнутый клинок с утолщением у кончика — идеален для рубящих ударов. Символ тюркского военного искусства и духа воина.</p>
+      </div>
+    </div>
 
+    <!-- Новый экспонат: Лук -->
+    <div class="item">
+      <model-viewer src="turk_bow.glb" alt="Тюркский лук" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Тюркский боевой лук</h3>
+        <p>Композитный лук, сочетавший силу и компактность. Использовался кочевниками для меткой стрельбы с коня на полном скаку.</p>
+      </div>
+    </div>
 
-    <!-- Можно добавить больше -->
+    <!-- Новый экспонат: Щит -->
+    <div class="item">
+      <model-viewer src="ottoman_shield.glb" alt="Османский щит" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Османский щит</h3>
+        <p>Круглый щит из прочной кожи и металла. Защищал воина от стрел и ударов меча, часто украшался символами власти и веры.</p>
+      </div>
+    </div>
 
   </section>
 
