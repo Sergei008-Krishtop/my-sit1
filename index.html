@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -101,6 +101,23 @@
       margin: 0;
       color: #ccc;
     }
+    .long-desc {
+      grid-column: span 2;
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(240,165,0,0.3);
+    }
+    .long-desc h3 {
+      color: #f0a500;
+      font-size: 1.6em;
+      margin-top: 0;
+    }
+    .long-desc p {
+      color: #ccc;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
     @media (max-width: 600px) {
       header h1 {
         font-size: 2em;
@@ -112,148 +129,250 @@
       .history, .gallery {
         padding: 20px;
       }
+      .long-desc {
+        grid-column: span 1;
+      }
     }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+.modal model-viewer {
+  width: 80vw;
+  height: 80vh;
+}
+.modal .close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+.expand-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #f0a500;
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.expand-btn:hover {
+  background-color: #ffbe32;
+}
+
   </style>
+
 </head>
+<!-- Модальное окно -->
+<div class="modal" id="modelModal">
+  <span class="close-btn" onclick="closeModal()">&times;</span>
+  <model-viewer id="modalViewer" src="" alt="Увеличенная модель" auto-rotate camera-controls></model-viewer>
+</div>
+
+<script>
+  function openModal(src, alt) {
+    const modal = document.getElementById('modelModal');
+    const viewer = document.getElementById('modalViewer');
+    viewer.src = src;
+    viewer.alt = alt;
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modelModal').style.display = 'none';
+    document.getElementById('modalViewer').src = ''; // очистка модели
+  }
+
+  // Закрытие по клику вне области viewer
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('modelModal');
+    const viewer = document.getElementById('modalViewer');
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+</script>
+
 <body>
 
-  <header>
-    <h1>3D Музей</h1>
-    <p>Погрузитесь в эпоху великих империй через интерактивные экспонаты</p>
-    <nav>
-      <a href="#turk">Тюркская и Османская</a>
-      <a href="#rome">Древний Рим</a>
-      <a href="#medieval">Средневековая Европа</a>
-    </nav>
-  </header>
+<header>
+  <h1>3D Музей</h1>
+  <p>Этот музей создан для всех, кто интересуется историей, культурой и военным делом</p>
+  <nav>
+    <a href="#turk">Тюркская и Османская</a>
+    <a href="#rome">Древний Рим</a>
+    <a href="#medieval">Средневековая Европа</a>
+  </nav>
+</header>
 
-  <section class="history" id="turk">
-    <h2>Добро пожаловать в Виртуальный Музей</h2>
-    <p>
-      Этот музей создан для всех, кто интересуется историей, культурой и военным делом тюркских народов и Османской империи. Здесь собраны уникальные артефакты — от изысканных доспехов до легендарного оружия, каждое из которых воссоздано в формате 3D. Вы можете вращать модели, приближать детали и буквально прикоснуться к прошлому.
-    </p>
-  </section>
+<!-- Секция 1: Тюркская и Османская эпоха -->
+<section class="history" id="turk">
+  <h2>Тюркская и Османская эпоха</h2>
+  <p>Добро пожаловать в эпоху, где степь и империя соединились в символ силы и мастерства. В этой секции представлены артефакты кочевников, превратившихся в правителей великих земель.</p>
+</section>
+<section class="gallery">
+  <div class="item">
+    <model-viewer src="ottoman_helmet (1).glb" alt="Оттоманский шлем" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
 
-  <section class="gallery">
-
-    <div class="item">
-      <model-viewer src="ottoman_helmet (1).glb" alt="Оттоманский шлем" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Османский боевой шлем</h3>
-        <p>Этот изогнутый шлем — шедевр средневекового оружейного искусства. Его поверхность украшена орнаментами, а форма обеспечивала идеальный баланс защиты и подвижности в бою.</p>
-      </div>
+    <div class="desc">
+      <h3>Османский боевой шлем</h3>
+      <p>Этот изогнутый шлем — шедевр средневекового оружейного искусства. Его поверхность украшена орнаментами, а форма обеспечивала идеальный баланс защиты и подвижности в бою.</p>
     </div>
+  </div>
+  <div class="item">
+    <model-viewer src="turk_kilij.glb" alt="Тюркский клинок" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
 
-    <div class="item">
-      <model-viewer src="turk_kilij.glb" alt="Тюркский клинок" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Тюркский клинок</h3>
-        <p>Килидж с изогнутым лезвием — символ силы кочевых воинов. Его рубящая мощь и эстетическая изысканность стали легендой степей и пустынь.</p>
-      </div>
+    <div class="desc">
+      <h3>Тюркский клинок</h3>
+      <p>Килидж с изогнутым лезвием — символ силы кочевых воинов. Его рубящая мощь и эстетическая изысканность стали легендой степей и пустынь.</p>
     </div>
+  </div>
+  <div class="item">
+    <model-viewer src="low_poly_shield.glb" alt="Османский щит" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
 
-    <div class="item">
-      <model-viewer src="low_poly_shield.glb" alt="Османский щит" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Османский щит</h3>
-        <p>Щит из плотной кожи и бронзы, отражавший удары сабель и стрел. Символ мужества и защиты, носимый элитными воинами империи.</p>
-      </div>
+    <div class="desc">
+      <h3>Османский щит</h3>
+      <p>Щит из плотной кожи и бронзы, отражавший удары сабель и стрел. Символ мужества и защиты, носимый элитными воинами империи.</p>
     </div>
+  </div>
+  <div class="item">
+    <model-viewer src="bow_arrow.glb" alt="Тюркский лук" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
 
-    <div class="item">
-      <model-viewer src="bow_arrow.glb" alt="Тюркский лук" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Тюркский боевой лук</h3>
-        <p>Композитный лук, созданный для точности и скорости. Идеален для стрельбы с коня — настоящее оружие степного ветра.</p>
-      </div>
+    <div class="desc">
+      <h3>Тюркский боевой лук</h3>
+      <p>Композитный лук, созданный для точности и скорости. Идеален для стрельбы с коня — настоящее оружие степного ветра.</p>
     </div>
-  </section>
+  </div>
 
-  <section class="history" id="rome">
-    <h2>Эпоха Древнего Рима</h2>
-    <p>
-      Погрузитесь в славные времена Римской империи — эпохи легионеров, гладиаторов и великих полководцев. Эти артефакты демонстрируют военное мастерство, технологическое превосходство и культуру античного Рима.
-    </p>
-  </section>
+  <div class="long-desc">
+    <h3>Военная мощь и культура империи</h3>
+    <p>Тюркские и Османские военные традиции пронизаны сочетанием мобильности и дисциплины. От лучников до янычар — каждый воин был частью идеологической и культурной машины. Архитектура, каллиграфия, литература и музыка были столь же важны, как и военное дело.</p>
+    <p>Каждый предмет здесь — больше, чем оружие. Это ключ к пониманию мировоззрения, системы ценностей и эстетики империи, распространившейся от Балкан до Ближнего Востока.</p>
+  </div>
+</section>
 
-  <section class="gallery">
+<!-- Секция 2: Древний Рим -->
+<section class="history" id="rome">
+  <h2>Эпоха Древнего Рима</h2>
+  <p>
+    Погрузитесь в славные времена Римской империи — эпохи легионеров, гладиаторов и великих полководцев. Эти артефакты демонстрируют военное мастерство, технологическое превосходство и культуру античного Рима.
+  </p>
+</section>
 
-    <div class="item">
-      <model-viewer src="imperial_roman_leather_helmet.glb" alt="Римский шлем" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Римский легионерский шлем</h3>
-        <p>Надёжный шлем из кожи и металла, защищавший солдат в жестоких битвах. Обеспечивал обзор, безопасность и внушал страх врагу.</p>
-      </div>
+<section class="gallery">
+  <div class="item">
+    <model-viewer src="imperial_roman_leather_helmet.glb" alt="Римский шлем" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Римский легионерский шлем</h3>
+      <p>Надёжный шлем из кожи и металла, защищавший солдат в жестоких битвах. Обеспечивал обзор, безопасность и внушал страх врагу.</p>
     </div>
+  </div>
 
-    <div class="item">
-      <model-viewer src="sword_of_tiberius.glb" alt="Гладиус" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Гладиус</h3>
-        <p>Короткий, но смертоносный меч. Орудие победы римских легионов, идеально подходившее для ближнего боя и точных выпадов.</p>
-      </div>
+  <div class="item">
+    <model-viewer src="sword_of_tiberius.glb" alt="Гладиус" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Гладиус</h3>
+      <p>Короткий, но смертоносный меч. Орудие победы римских легионов, идеально подходившее для ближнего боя и точных выпадов.</p>
     </div>
+  </div>
 
-    <div class="item">
-      <model-viewer src="scutum.glb" alt="Скутум" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Скутум</h3>
-        <p>Массивный щит с выпуклой поверхностью, формировавший стену неприступной защиты. Символ силы и единства римской пехоты.</p>
-      </div>
+  <div class="item">
+    <model-viewer src="scutum.glb" alt="Скутум" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Скутум</h3>
+      <p>Массивный щит с выпуклой поверхностью, формировавший стену неприступной защиты. Символ силы и единства римской пехоты.</p>
     </div>
+  </div>
 
-    <div class="item">
-      <model-viewer src="roman_officer_-_body_armour.glb" alt="Лорика сегментата" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Лорика сегментата</h3>
-        <p>Инновационный доспех, сочетающий гибкость и надёжность. Его металлические пластины гарантировали выживание на поле боя.</p>
-      </div>
+  <div class="item">
+    <model-viewer src="roman_officer_-_body_armour.glb" alt="Лорика сегментата" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Лорика сегментата</h3>
+      <p>Инновационный доспех, сочетающий гибкость и надёжность. Его металлические пластины гарантировали выживание на поле боя.</p>
     </div>
+  </div>
 
-  </section>
+  <div class="long-desc">
+    <h3>Власть, дисциплина и величие</h3>
+    <p>Военное дело Рима — это идеал стратегии и технического прогресса. Легионеры были не просто солдатами — они были символом порядка, дисциплины и инженерной мощи. Их вооружение стало образцом на века.</p>
+    <p>Сами артефакты говорят: это была цивилизация, в которой военная машина и правовая система шли рука об руку. Их наследие живёт в каждом щите, мече и доспехе.</p>
+  </div>
+</section>
 
-  <section class="history" id="medieval">
-    <h2>Средневековая Европа</h2>
-    <p>
-      Эта эпоха знаменовалась рыцарскими орденами, замками и суровыми сражениями. В экспозиции представлены элементы снаряжения, оружия и защитной амуниции, использовавшиеся в Западной Европе в X–XV веках.
-    </p>
-  </section>
 
-  <section class="gallery">
+<!-- Секция 3: Средневековая Европа -->
+<section class="history" id="medieval">
+  <h2>Средневековая Европа</h2>
+  <p>
+    Эта эпоха знаменовалась рыцарскими орденами, замками и суровыми сражениями. В экспозиции представлены элементы снаряжения, оружия и защитной амуниции, использовавшиеся в Западной Европе в X–XV веках.
+  </p>
+</section>
 
-    <div class="item">
-      <model-viewer src="medieval_sword.glb" alt="Средневековый меч" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Средневековый меч</h3>
-        <p>Классическое оружие рыцарей, созданное для мощных ударов и защиты чести на дуэлях.</p>
-      </div>
+<section class="gallery">
+  <div class="item">
+    <model-viewer src="medieval_sword.glb" alt="Средневековый меч" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Средневековый меч</h3>
+      <p>Классическое оружие рыцарей, созданное для мощных ударов и защиты чести на дуэлях.</p>
     </div>
+  </div>
 
-    <div class="item">
-      <model-viewer src="knight_shield_3dmodel_2k.glb" alt="Рыцарский щит" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Рыцарский щит</h3>
-        <p>Щит со львом также использовался в средневековой Европе и был символом рыцарства. Рыцари носили его на своих доспехах, чтобы показать свою верность и преданность своему королю или господину.</p>
-      </div>
+  <div class="item">
+    <model-viewer src="knight_shield_3dmodel_2k.glb" alt="Рыцарский щит" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Рыцарский щит</h3>
+      <p>Щит со львом также использовался в средневековой Европе и был символом рыцарства. Рыцари носили его на своих доспехах, чтобы показать свою верность и преданность своему королю или господину.</p>
     </div>
+  </div>
 
-    <div class="item">
-      <model-viewer src="medieval_crossbow_game_model.glb" alt="Арбалет" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Арбалет</h3>
-        <p>Мощное дальнобойное оружие, изменившее ход многих сражений Средневековья.</p>
-      </div>
+  <div class="item">
+    <model-viewer src="medieval_crossbow_game_model.glb" alt="Арбалет" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Арбалет</h3>
+      <p>Мощное дальнобойное оружие, изменившее ход многих сражений Средневековья.</p>
     </div>
+  </div>
 
-    <div class="item">
-      <model-viewer src="knight_-_includes_file_for_3d_printing.glb" alt="Рыцарские доспехи" auto-rotate camera-controls></model-viewer>
-      <div class="desc">
-        <h3>Рыцарские доспехи</h3>
-        <p>Полный комплект металлической брони, обеспечивающий защиту на поле боя и символизирующий статус воина.</p>
-      </div>
+  <div class="item">
+    <model-viewer src="knight_-_includes_file_for_3d_printing.glb" alt="Рыцарские доспехи" auto-rotate camera-controls></model-viewer>
+<button class="expand-btn" onclick="openModal('ПУТЬ_К_ФАЙЛУ.glb', 'Описание')">Увеличить</button>
+
+    <div class="desc">
+      <h3>Рыцарские доспехи</h3>
+      <p>Полный комплект металлической брони, обеспечивающий защиту на поле боя и символизирующий статус воина.</p>
     </div>
+  </div>
 
-  </section>
-
-</body>
-</html>
+  <div class="long-desc">
+    <h3>Кодекс чести и рыцарская доблесть</h3>
+    <p>Средневековая Европа — это символ героизма, религии и романтизированной войны. Рыцари в доспехах, мощные арбалеты, искусные мечи — все эти артефакты воплощают дух времени.</p>
+    <p>Сила, преданность и честь — главные добродетели эпохи. Каждый предмет в экспозиции несёт в себе не только военное значение, но и культурное наследие, которое сформировало европейскую цивилизацию.</p>
+  </div>
+</section>
