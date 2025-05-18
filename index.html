@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -12,12 +12,27 @@
       background-color: #111;
       color: #eee;
       line-height: 1.6;
+      scroll-behavior: smooth;
     }
     header {
       background-color: #222;
       text-align: center;
-      padding: 30px 20px;
+      padding: 30px 20px 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+    nav {
+      margin-top: 15px;
+    }
+    nav a {
+      color: #f0a500;
+      text-decoration: none;
+      margin: 0 12px;
+      font-size: 1.1em;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav a:hover {
+      border-color: #f0a500;
     }
     header h1 {
       margin: 0;
@@ -90,6 +105,10 @@
       header h1 {
         font-size: 2em;
       }
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
       .history, .gallery {
         padding: 20px;
       }
@@ -101,9 +120,14 @@
   <header>
     <h1>3D Музей</h1>
     <p>Погрузитесь в эпоху великих империй через интерактивные экспонаты</p>
+    <nav>
+      <a href="#turk">Тюркская и Османская</a>
+      <a href="#rome">Древний Рим</a>
+      <a href="#medieval">Средневековая Европа</a>
+    </nav>
   </header>
 
-  <section class="history">
+  <section class="history" id="turk">
     <h2>Добро пожаловать в Виртуальный Музей</h2>
     <p>
       Этот музей создан для всех, кто интересуется историей, культурой и военным делом тюркских народов и Османской империи. Здесь собраны уникальные артефакты — от изысканных доспехов до легендарного оружия, каждое из которых воссоздано в формате 3D. Вы можете вращать модели, приближать детали и буквально прикоснуться к прошлому.
@@ -111,87 +135,125 @@
   </section>
 
   <section class="gallery">
-  <!-- 1. Шлем -->
-  <div class="item">
-    <model-viewer src="ottoman_helmet (1).glb" alt="Оттоманский шлем" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Османский боевой шлем</h3>
-      <p>Массивный шлем с полукруглым верхом, использовавшийся элитной кавалерией Османской империи. Украшен восточными узорами и защищал в сражениях XVI века.</p>
+
+    <div class="item">
+      <model-viewer src="ottoman_helmet (1).glb" alt="Оттоманский шлем" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Османский боевой шлем</h3>
+        <p>Этот изогнутый шлем — шедевр средневекового оружейного искусства. Его поверхность украшена орнаментами, а форма обеспечивала идеальный баланс защиты и подвижности в бою.</p>
+      </div>
     </div>
-  </div>
 
-  <!-- 2. Клинок -->
-  <div class="item">
-    <model-viewer src="turk_kilij.glb" alt="Тюркский клинок" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Тюркский клинок</h3>
-      <p>Изогнутый клинок с утолщением у кончика — идеален для рубящих ударов. Символ тюркского военного искусства и духа воина.</p>
+    <div class="item">
+      <model-viewer src="turk_kilij.glb" alt="Тюркский клинок" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Тюркский клинок</h3>
+        <p>Килидж с изогнутым лезвием — символ силы кочевых воинов. Его рубящая мощь и эстетическая изысканность стали легендой степей и пустынь.</p>
+      </div>
     </div>
-  </div>
 
-  <!-- 3. Щит (перемещён под клинок) -->
-  <div class="item">
-    <model-viewer src="low_poly_shield.glb" alt="Османский щит" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Османский щит</h3>
-      <p>Круглый щит из прочной кожи и металла. Защищал воина от стрел и ударов меча, часто украшался символами власти и веры.</p>
+    <div class="item">
+      <model-viewer src="low_poly_shield.glb" alt="Османский щит" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Османский щит</h3>
+        <p>Щит из плотной кожи и бронзы, отражавший удары сабель и стрел. Символ мужества и защиты, носимый элитными воинами империи.</p>
+      </div>
     </div>
-  </div>
 
-  <!-- 4. Лук -->
-  <div class="item">
-    <model-viewer src="bow_arrow.glb" alt="Тюркский лук" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Тюркский боевой лук</h3>
-      <p>Композитный лук, сочетавший силу и компактность. Использовался кочевниками для меткой стрельбы с коня на полном скаку.</p>
+    <div class="item">
+      <model-viewer src="bow_arrow.glb" alt="Тюркский лук" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Тюркский боевой лук</h3>
+        <p>Композитный лук, созданный для точности и скорости. Идеален для стрельбы с коня — настоящее оружие степного ветра.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Новая эпоха: Древний Рим -->
-<section class="history">
-  <h2>Эпоха Древнего Рима</h2>
-  <p>
-    Погрузитесь в славные времена Римской империи — эпохи легионеров, гладиаторов и великих полководцев. Эти артефакты демонстрируют военное мастерство, технологическое превосходство и культуру античного Рима.
-  </p>
-</section>
+  <section class="history" id="rome">
+    <h2>Эпоха Древнего Рима</h2>
+    <p>
+      Погрузитесь в славные времена Римской империи — эпохи легионеров, гладиаторов и великих полководцев. Эти артефакты демонстрируют военное мастерство, технологическое превосходство и культуру античного Рима.
+    </p>
+  </section>
 
-<section class="gallery">
+  <section class="gallery">
 
-  <!-- Римский шлем -->
-  <div class="item">
-    <model-viewer src="imperial_roman_leather_helmet.glb" alt="Римский шлем" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Римский легионерский шлем</h3>
-      <p>Типичный шлем легионера, обеспечивавший защиту головы и лица в битвах на полях Европы и Ближнего Востока.</p>
+    <div class="item">
+      <model-viewer src="imperial_roman_leather_helmet.glb" alt="Римский шлем" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Римский легионерский шлем</h3>
+        <p>Надёжный шлем из кожи и металла, защищавший солдат в жестоких битвах. Обеспечивал обзор, безопасность и внушал страх врагу.</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Гладиус -->
-  <div class="item">
-    <model-viewer src="sword_of_tiberius.glb" alt="Гладиус" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Гладиус</h3>
-      <p>Короткий меч, использовавшийся римскими солдатами. Отличался манёвренностью и был идеален для ближнего боя.</p>
+    <div class="item">
+      <model-viewer src="sword_of_tiberius.glb" alt="Гладиус" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Гладиус</h3>
+        <p>Короткий, но смертоносный меч. Орудие победы римских легионов, идеально подходившее для ближнего боя и точных выпадов.</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Римский щит -->
-  <div class="item">
-    <model-viewer src="scutum.glb" alt="Скутум" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Скутум</h3>
-      <p>Большой изогнутый щит, применявшийся римскими легионерами для формирования тестудо — "черепахи".</p>
+    <div class="item">
+      <model-viewer src="scutum.glb" alt="Скутум" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Скутум</h3>
+        <p>Массивный щит с выпуклой поверхностью, формировавший стену неприступной защиты. Символ силы и единства римской пехоты.</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Панцирь -->
-  <div class="item">
-    <model-viewer src="roman_officer_-_body_armour.glb" alt="Лорика сегментата" auto-rotate camera-controls></model-viewer>
-    <div class="desc">
-      <h3>Лорика сегментата</h3>
-      <p>Знаменитый сегментированный доспех, который сочетал защиту и гибкость, являлся символом римской дисциплины.</p>
+    <div class="item">
+      <model-viewer src="roman_officer_-_body_armour.glb" alt="Лорика сегментата" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Лорика сегментата</h3>
+        <p>Инновационный доспех, сочетающий гибкость и надёжность. Его металлические пластины гарантировали выживание на поле боя.</p>
+      </div>
     </div>
-  </div>
 
-</section>
+  </section>
+
+  <section class="history" id="medieval">
+    <h2>Средневековая Европа</h2>
+    <p>
+      Эта эпоха знаменовалась рыцарскими орденами, замками и суровыми сражениями. В экспозиции представлены элементы снаряжения, оружия и защитной амуниции, использовавшиеся в Западной Европе в X–XV веках.
+    </p>
+  </section>
+
+  <section class="gallery">
+
+    <div class="item">
+      <model-viewer src="medieval_sword.glb" alt="Средневековый меч" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Средневековый меч</h3>
+        <p>Классическое оружие рыцарей, созданное для мощных ударов и защиты чести на дуэлях.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <model-viewer src="knight_helmet.glb" alt="Шлем рыцаря" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Рыцарский шлем</h3>
+        <p>Защитный головной убор с визором, позволяющий выдерживать удары копья и меча.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <model-viewer src="crossbow.glb" alt="Арбалет" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Арбалет</h3>
+        <p>Мощное дальнобойное оружие, изменившее ход многих сражений Средневековья.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <model-viewer src="knight_armor.glb" alt="Рыцарские доспехи" auto-rotate camera-controls></model-viewer>
+      <div class="desc">
+        <h3>Рыцарские доспехи</h3>
+        <p>Полный комплект металлической брони, обеспечивающий защиту на поле боя и символизирующий статус воина.</p>
+      </div>
+    </div>
+
+  </section>
+
+</body>
+</html>
